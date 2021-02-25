@@ -88,18 +88,19 @@ If you've got a meter not on the list that you've successfully received messages
 
 
 ### Command Line testing - log to txt file
-Once you get the SDR dongle up and running, you can get data from all the meters your SDR can receive. Then you need to look for your meter ID within the data:
-You can print the data directly to terminal (useful to test if you are receiving data):
-/home/pi/go/bin/rtlamr 
+Once you get the SDR dongle up and running, you can get at data from all the meters your SDR can receive, depending on your antanae set up. Then you need to look for your meter ID within the data.
 
-Or more useful, print the data to a text file as a CSV so you can sort and filter in Excel to look for your meter ID:
-/home/pi/go/bin/rtlamr -format=csv >> /home/pi/rtl-sdr/meter_dump.txt
+First, you'll want to print the data directly to terminal to test if you are actually receiving data:
+```/home/pi/go/bin/rtlamr``` 
+
+Once you've confirmed data is being received, you will want to print the data to a text file as a CSV so you can sort and filter in Excel. There, you can look for your meter ID:
+```/home/pi/go/bin/rtlamr -format=csv >> /home/pi/rtl-sdr/meter_dump.txt```
 
 Once you find your meter ID, you can add a filter to get only your meters:
 |meter|command|
 |-----|-----|
-|Elec|/home/pi/go/bin/rtlamr -filterid=500576711 -msgtype=scm -format=csv >> /home/pi/rtl-sdr/ELEC.txt|
-|Gas|/home/pi/go/bin/rtlamr -filterid=76356921 -msgtype=scm+ -format=csv >> /home/pi/rtl-sdr/GAS.txt|
+|Elec|```/home/pi/go/bin/rtlamr -filterid=500576711 -msgtype=scm -format=csv >> /home/pi/rtl-sdr/ELEC.txt```|
+|Gas|```/home/pi/go/bin/rtlamr -filterid=76356921 -msgtype=scm+ -format=csv >> /home/pi/rtl-sdr/GAS.txt```|
 
 Other Useful rtl-amr options:
 
@@ -119,7 +120,8 @@ Other Useful rtl-amr options:
 ---
 
 ### Python to Collect and Send Data
-Now that you have identified your meter(s) it is time to create a python script to receive the gas meter transmission and send the consumption data/reading over [MQTT](https://en.wikipedia.org/wiki/MQTT). The python script itself is located here: /home/pi/rtl-sdr/gas_rtlamr2mqtt.py
+Now that you have identified your meter(s) it is time to create a python script to receive the gas meter transmission and send the consumption data/reading over [MQTT](https://en.wikipedia.org/wiki/MQTT). The python script itself is located here: ```/home/pi/rtl-sdr/gas_rtlamr2mqtt.py```
+
 
 ``` 
 import subprocess
@@ -153,16 +155,19 @@ except KeyboardInterrupt:
 
 ---
 ### Create a Service for the Script
-Now we're going to define a [service](https://www.hostinger.com/tutorials/manage-and-list-services-in-linux/) to run this script. The service definition (defined in the XXX.service file) must be in the /lib/systemd/system folder. Our service is going to be called "gasmeter2mqtt.service". When finished, if by any means is the script gets aborted (power outage, reboot of system, etc), the service will be restarted automatically and srat running the python script again.
+Now we're going to define a [service](https://www.hostinger.com/tutorials/manage-and-list-services-in-linux/) to run this script. The service definition (defined in the ```XXX.service file```) must be in the ```/lib/systemd/system``` folder. Our service is going to be called ```gasmeter2mqtt.service```. When finished, if for any reason the script gets aborted (power outage, reboot of system, etc), the service will be restarted automatically and start running the python script again, resuming your data collection.
 
-Navigate to the system folder and create the service file:
+Navigate to the system folder:
 ```
 cd /lib/systemd/system/
+```
+
+Create the service file:
+```
 sudo nano gasmeter2mqtt.service
 ```
 
 Populate the service file:
-
 ```
 [Unit]
 Description=RTLAMR Software Defined Radio intercept of gas meter via python script
