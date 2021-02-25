@@ -75,50 +75,133 @@ Check out the table of meters I've been compiling from various internet sources:
 
 If you've got a meter not on the list that you've successfully received messages from, you can submit this info via a form available at the link above.
 
-### Ethics
 
-_Do not use this for malicious purposes._ If you do, I don't want to know about it, I am not and will not be responsible for your actions. However, if you find a clever non-evil use for this, by all means, share.
 
-### Use Cases
 
-These are a few examples of ways this tool could be used:
 
-**Ethical**
 
-- Track down stray appliances.
-- Track power generated vs. power consumed.
-- Find a water leak with rtlamr rather than from your bill.
-- Optimize your thermostat to reduce energy consumption.
-- Mass collection for research purposes. (_Please_ anonymize your data.)
+### Main Folders for reference
+/home/pi/rtl-sdr
+/home/pi/go
 
-**Unethical**
 
-- Using data collected to determine living patterns of specific persons with the intent to act on this data, particularly without express permission to do so.
 
-### License
 
-The source of this project is licensed under Affero GPL v3.0. According to [http://choosealicense.com/licenses/agpl-3.0/](http://choosealicense.com/licenses/agpl-3.0/) you may:
+### Command Line testing - log to txt file
+Once you get the SDR dongle up and running, you can get data from all the meters your SDR can receive. Then you need to look for your meter ID within the data:
+You can print the data directly to terminal (useful to test if you are receiving data):
+/home/pi/go/bin/rtlamr 
 
-#### Required:
+Or more useful, print the data to a text file as a CSV so you can sort and filter in Excel to look for your meter ID:
+/home/pi/go/bin/rtlamr -format=csv >> /home/pi/rtl-sdr/meter_dump.txt
 
-- **Disclose Source:** Source code must be made available when distributing the software. In the case of LGPL, the source for the library (and not the entire program) must be made available.
-- **License and copyright notice:** Include a copy of the license and copyright notice with the code.
-- **Network Use is Distribution:** Users who interact with the software via network are given the right to receive a copy of the corresponding source code.
-- **State Changes:** Indicate significant changes made to the code.
+Once you find your meter ID, you can add a filter to get only your meters:
+|meter|command|
+|-----|-----|
+|Elec|/home/pi/go/bin/rtlamr -filterid=500576711 -msgtype=scm -format=csv >> /home/pi/rtl-sdr/ELEC.txt|
+|Gas|/home/pi/go/bin/rtlamr -filterid=76356921 -msgtype=scm+ -format=csv >> /home/pi/rtl-sdr/GAS.txt|
 
-#### Permitted:
+Other Useful rtl-amr options:
 
-- **Commercial Use:** This software and derivatives may be used for commercial purposes.
-- **Distribution:** You may distribute this software.
-- **Modification:** This software may be modified.
-- **Patent Grant:** This license provides an express grant of patent rights from the contributor to the recipient.
-- **Private Use:** You may use and modify the software without distributing it.
+|rtlamr flag options|Description|
+|-----|-----|
+|-duration=0s|time to run for, 0 for infinite, ex. 1h5m10s|
+|-filterid=|display only messages matching an id in a comma-separated list of ids|
+|-filtertype=|display only messages matching a type in a comma-separated list of types|
+|-format=plain|decoded message output format: plain, csv, json, or xml|
+|-msgtype=|comma-separated list of message types to receive: all, scm, scm+, idm, netidm, r900 and r900bcd|
+|-samplefile=NUL|raw signal dump file|
+|-single=|true/false; one shot execution, if used with -filterid, will wait for exactly one packet from each meter id|
+|-symbollength=|symbol length in samples (8, 32, 40, 48, 56, 64, 72, 80, 88, 96)|
+|-unique=|true/false: suppress duplicate messages from each meter|
+|-version=|true/false: display build date and commit hash|
 
-#### Forbidden:
 
-- **Hold Liable:** Software is provided without warranty and the software author/license owner cannot be held liable for damages.
-- **Sublicensing:** You may not grant a sublicense to modify and distribute this software to third parties not included in the license.
 
-### Feedback
 
-If you have any questions, comments, feedback or bugs, please submit an issue.
+
+
+
+### Python to Collect and Send Data
+Now that you have identified your meter(s) it is time to create a python script to receive the gas meter transmission and send the consumption data/reading over [MQTT](https://en.wikipedia.org/wiki/MQTT). The python script itself is located here: /home/pi/rtl-sdr/gas_rtlamr2mqtt.py
+
+``` 
+import subprocess
+import paho.mqtt.client as mqtt
+import time
+import json
+
+client = mqtt.Client("SDR Meter Reader")
+client.username_pw_set(username="XXX",password="XXX")
+client.connect("192.168.1.237", 1883, 60)
+client.loop_start()
+
+
+try:
+  while True:
+      completed = subprocess.run(['/home/pi/go/bin/rtlamr','-filterid=76356921','-msgtype=scm+','-single=true', '-format=json', '-duration=10m'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+      try:
+         data=json.loads(completed.stdout.decode("utf-8"))
+      except ValueError:
+         print("Error")
+      else:
+         reading = data['Message']['Consumption']
+         client.publish("home/gasmeter",reading,0,True);
+         print("Reading:",reading)
+except KeyboardInterrupt:
+  print("interrupted!")
+  client.loop_stop()
+  client.disconnect()
+
+```
+
+
+### Create a Service for the Script
+Now we're going to define a [service](https://www.hostinger.com/tutorials/manage-and-list-services-in-linux/) to run this script. The service definition (defined in the XXX.service file) must be in the /lib/systemd/system folder. Our service is going to be called "gasmeter2mqtt.service". When finished, if by any means is the script gets aborted (power outage, reboot of system, etc), the service will be restarted automatically and srat running the python script again.
+
+Navigate to the system folder and create the service file:
+```
+cd /lib/systemd/system/
+sudo nano gasmeter2mqtt.service
+```
+
+Populate the service file:
+
+```
+[Unit]
+Description=RTLAMR Software Defined Radio intercept of gas meter via python script
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/rtl-sdr/gas_rtlamr2mqtt.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Adjust permissions for the service and the script:
+```
+sudo chmod 644 /lib/systemd/system/gasmeter2mqtt.service
+chmod +x /home/pi/hello_world.py
+```
+
+Reload services for changes to take effect:
+```
+sudo systemctl daemon-reload
+```
+
+Enable and start the service:
+```
+sudo systemctl enable gasmeter2mqtt.service
+sudo systemctl start gasmeter2mqtt.service
+```
+
+Other common service related tools:
+|Function|Command|
+|-----|-----|
+|Check status|```sudo systemctl status gasmeter2mqtt.service```|
+|Start service|```sudo systemctl start gasmeter2mqtt.service```|
+|Stop service|```sudo systemctl stop gasmeter2mqtt.service```|
+|Check log|```sudo journalctl -f -u gasmeter2mqtt.service```|
