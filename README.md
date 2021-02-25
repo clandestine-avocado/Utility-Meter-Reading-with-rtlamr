@@ -91,12 +91,13 @@ Electric Meter:
 |Freq Range|910.0-920.0 mHz|
 |Links|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
 
-
+---
 ### Main Folders for reference
+```
 /home/pi/rtl-sdr
 /home/pi/go
-
-
+```
+---
 
 
 ### Command Line testing - log to txt file
@@ -128,11 +129,7 @@ Other Useful rtl-amr options:
 |-unique=|true/false: suppress duplicate messages from each meter|
 |-version=|true/false: display build date and commit hash|
 
-
-
-
-
-
+---
 
 ### Python to Collect and Send Data
 Now that you have identified your meter(s) it is time to create a python script to receive the gas meter transmission and send the consumption data/reading over [MQTT](https://en.wikipedia.org/wiki/MQTT). The python script itself is located here: /home/pi/rtl-sdr/gas_rtlamr2mqtt.py
@@ -167,7 +164,7 @@ except KeyboardInterrupt:
 
 ```
 
-
+---
 ### Create a Service for the Script
 Now we're going to define a [service](https://www.hostinger.com/tutorials/manage-and-list-services-in-linux/) to run this script. The service definition (defined in the XXX.service file) must be in the /lib/systemd/system folder. Our service is going to be called "gasmeter2mqtt.service". When finished, if by any means is the script gets aborted (power outage, reboot of system, etc), the service will be restarted automatically and srat running the python script again.
 
@@ -217,3 +214,7 @@ Other common service related tools:
 |Start service|```sudo systemctl start gasmeter2mqtt.service```|
 |Stop service|```sudo systemctl stop gasmeter2mqtt.service```|
 |Check log|```sudo journalctl -f -u gasmeter2mqtt.service```|
+
+---
+
+
