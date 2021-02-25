@@ -37,7 +37,19 @@ $ rtl_tcp
 # Terminal B
 $ rtlamr
 ```
+### My Meters:
 
+Gas Meter:
+Cat|Description|
+|-----|-----|
+|Type|Itron 100GDLS|
+|FCC ID|EWQ100GDLAS|
+|rtlamr ID|76356921|
+|Freq Range|903.0-926.85 mHz|
+|Links|[FCC Link 1:](https://apps.fcc.gov/oetcf/tcb/reports/Tcb731GrantForm.cfm?mode=COPY&RequestTimeout=500&tcb_code=&application_id=DnaFgjHGnUo76ite3zO8MA%3D%3D&fcc_id=EWQ100GDLBS) and [FCC Link 2](https://fccid.io/EWQ100GDLAS)|
+
+
+### Run Server Remotely
 If you want to run the spectrum server on a different machine than the receiver you'll want to specify an address to listen on that is accessible from the machine `rtlamr` will run on with the `-a` option for `rtl_tcp` with an address accessible by the system running the receiver.
 
 ### Message Types
