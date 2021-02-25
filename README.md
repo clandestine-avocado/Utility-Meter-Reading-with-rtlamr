@@ -37,16 +37,7 @@ $ rtl_tcp
 # Terminal B
 $ rtlamr
 ```
-### My Meters:
 
-Gas Meter:
-Cat|Description|
-|-----|-----|
-|Type|Itron 100GDLS|
-|FCC ID|EWQ100GDLAS|
-|rtlamr ID|76356921|
-|Freq Range|903.0-926.85 mHz|
-|Links|[FCC Link 1:](https://apps.fcc.gov/oetcf/tcb/reports/Tcb731GrantForm.cfm?mode=COPY&RequestTimeout=500&tcb_code=&application_id=DnaFgjHGnUo76ite3zO8MA%3D%3D&fcc_id=EWQ100GDLBS) and [FCC Link 2](https://fccid.io/EWQ100GDLAS)|
 
 
 ### Run Server Remotely
@@ -65,7 +56,7 @@ The following message types are supported by rtlamr:
 
 ### Sensitivity
 
-Using a NooElec NESDR Nano R820T with the provided antenna, I can reliably receive standard consumption messages from ~300 different meters and intermittently from another ~600 meters. These figures are calculated from the number of messages received during a 25 minute window. Reliably in this case means receiving at least 10 of the expected 12 messages and intermittently means 3-9 messages.
+Using a [Nooelec RTL-SDR with RTL2832U & R820T](https://www.amazon.com/gp/product/B008S7AVTC/ref=ppx_yo_dt_b_asin_title_o09_s00?ie=UTF8&psc=1) with the provided antenna, I can reliably receive standard consumption messages from ~300 different meters and intermittently from another ~600 meters. These figures are calculated from the number of messages received during a 25 minute window. Reliably in this case means receiving at least 10 of the expected 12 messages and intermittently means 3-9 messages.
 
 ### Compatibility
 
@@ -77,7 +68,28 @@ If you've got a meter not on the list that you've successfully received messages
 
 
 
+\
 
+### My Meters:
+
+Gas Meter:
+|Category|Description|
+|-----|-----|
+|Type|Itron 100GDLS|
+|FCC ID|EWQ100GDLAS|
+|rtlamr ID|76356921|
+|Freq Range|903.0-926.85 mHz|
+|Links|[FCC Link 1:](https://apps.fcc.gov/oetcf/tcb/reports/Tcb731GrantForm.cfm?mode=COPY&RequestTimeout=500&tcb_code=&application_id=DnaFgjHGnUo76ite3zO8MA%3D%3D&fcc_id=EWQ100GDLBS) and [FCC Link 2](https://fccid.io/EWQ100GDLAS)|
+
+
+Electric Meter:
+|Category|Description|
+|-----|-----|
+|Type|41ER-1|
+|FCC ID|EO941ER-1|
+|rtlamr ID|500576711|
+|Freq Range|910.0-920.0 mHz|
+|Links|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
 
 
 ### Main Folders for reference
