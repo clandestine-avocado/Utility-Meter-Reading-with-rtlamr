@@ -72,24 +72,11 @@ If you've got a meter not on the list that you've successfully received messages
 
 ### My Meters:
 
-Gas Meter:
-|Category|Description|
-|-----|-----|
-|Type|Itron 100GDLS|
-|FCC ID|EWQ100GDLAS|
-|rtlamr ID|76356921|
-|Freq Range|903.0-926.85 mHz|
-|Links|[FCC Link 1:](https://apps.fcc.gov/oetcf/tcb/reports/Tcb731GrantForm.cfm?mode=COPY&RequestTimeout=500&tcb_code=&application_id=DnaFgjHGnUo76ite3zO8MA%3D%3D&fcc_id=EWQ100GDLBS) and [FCC Link 2](https://fccid.io/EWQ100GDLAS)|
+|Utility|Name/Model|Type #|FCC_ID|rtl-amr ID|Freq Range (mHz)|Links|
+|-------|-------|-------|-------|-------|-------|
+|Gas|Itron 100GDLS|12|EWQ100GDLAS|76356921|903.0-926.85|[FCC Link 1:](https://apps.fcc.gov/oetcf/tcb/reports/Tcb731GrantForm.cfm?mode=COPY&RequestTimeout=500&tcb_code=&application_id=DnaFgjHGnUo76ite3zO8MA%3D%3D&fcc_id=EWQ100GDLBS) and [FCC Link 2](https://fccid.io/EWQ100GDLAS)|
+|Utility|41ER-1|4|EO941ER-1|500576711|910.0-920.0|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
 
-
-Electric Meter:
-|Category|Description|
-|-----|-----|
-|Type|41ER-1|
-|FCC ID|EO941ER-1|
-|rtlamr ID|500576711|
-|Freq Range|910.0-920.0 mHz|
-|Links|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
 
 ---
 ### Main Folders for reference
