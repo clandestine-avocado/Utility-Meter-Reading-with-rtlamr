@@ -102,6 +102,25 @@ Once you find your meter ID, you can add a filter to get only your meters:
 |Elec|```/home/pi/go/bin/rtlamr -filterid=500576711 -msgtype=scm -format=csv >> /home/pi/rtl-sdr/ELEC.txt```|
 |Gas|```/home/pi/go/bin/rtlamr -filterid=76356921 -msgtype=scm+ -format=csv >> /home/pi/rtl-sdr/GAS.txt```|
 
+
+Examples:
+
+Pull all SCM+ msgs:
+```
+/home/pi/go/bin/rtlamr -msgtype=scm+
+```
+
+-filterid=: display only messages matching an id in a comma-separated list of ids.
+```
+/home/pi/go/bin/rtlamr -filterid=500576711,76356921
+```
+
+-filtertype=: display only messages matching a type in a comma-separated list of types
+```
+/home/pi/go/bin/rtlamr -msgtype=scm,scm+
+```
+
+
 Other Useful rtl-amr options:
 
 |rtlamr flag options|Description|
@@ -199,10 +218,24 @@ sudo systemctl enable gasmeter2mqtt.service
 sudo systemctl start gasmeter2mqtt.service
 ```
 
-Common Testing commands:
+Pull all SCM+ msgs:
 ```
 /home/pi/go/bin/rtlamr -msgtype=scm+
 ```
+
+-filterid=: display only messages matching an id in a comma-separated list of ids.
+```
+/home/pi/go/bin/rtlamr -filterid=500576711,76356921
+```
+
+-filtertype=: display only messages matching a type in a comma-separated list of types
+```
+/home/pi/go/bin/rtlamr -msgtype=scm,scm+
+```
+
+
+
+
 
 |Function|Command|
 |-----|-----|
