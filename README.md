@@ -199,6 +199,26 @@ sudo systemctl enable gasmeter2mqtt.service
 sudo systemctl start gasmeter2mqtt.service
 ```
 
+Common Testing commands:
+```
+/home/pi/go/bin/rtlamr -msgtype=scm+
+```
+
+|Function|Command|
+|-----|-----|
+|Pull all SCM+ msgs|```/home/pi/go/bin/rtlamr -msgtype=scm+```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
+
+---
+
+
+
 Other common service related tools:
 |Function|Command|
 |-----|-----|
