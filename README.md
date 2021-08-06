@@ -79,6 +79,10 @@ If you've got a meter not on the list that you've successfully received messages
 
 ---
 
+rtl_amr --> CenterFreq: 912380000
+
+
+
 ### Main Folders for reference
 ```
 /home/pi/rtl-sdr
