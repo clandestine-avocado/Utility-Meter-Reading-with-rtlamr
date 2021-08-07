@@ -75,7 +75,7 @@ If you've got a meter not on the list that you've successfully received messages
 |Utility|Model|Type#|FCC_ID|rtl-amrID|FreqRange_mHz|Links|
 |-------|-------|-----|-------|-------|-------|-------|
 |Gas|Itron 100GDLS|12|EWQ100GDLAS|76356921|903.0-926.85|[FCC Link 1:](https://apps.fcc.gov/oetcf/tcb/reports/Tcb731GrantForm.cfm?mode=COPY&RequestTimeout=500&tcb_code=&application_id=DnaFgjHGnUo76ite3zO8MA%3D%3D&fcc_id=EWQ100GDLBS) and [FCC Link 2](https://fccid.io/EWQ100GDLAS)|
-|Electric|41ER-1|4|EO941ER-1|500576711|910.0-920.0|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
+|Electric|41ER-1|4|EO941ER-1|50056711|910.0-920.0|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
 
 ---
 
@@ -103,7 +103,7 @@ Once you've confirmed data is being received, you will want to print the data to
 Once you find your meter ID, you can add a filter to get only your meters:
 |meter|command|
 |-----|-----|
-|Elec|```/home/pi/go/bin/rtlamr -filterid=500576711 -msgtype=scm -format=csv >> /home/pi/rtl-sdr/ELEC.txt```|
+|Elec|```/home/pi/go/bin/rtlamr -filterid=50056711 -msgtype=scm -format=csv >> /home/pi/rtl-sdr/ELEC.txt```|
 |Gas|```/home/pi/go/bin/rtlamr -filterid=76356921 -msgtype=scm+ -format=csv >> /home/pi/rtl-sdr/GAS.txt```|
 
 
