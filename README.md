@@ -116,7 +116,7 @@ Pull all SCM+ msgs:
 
 -filterid=: display only messages matching an id in a comma-separated list of ids.
 ```
-/home/pi/go/bin/rtlamr -filterid=500576711,76356921
+/home/pi/go/bin/rtlamr -filterid=50056711,76356921
 ```
 
 -filtertype=: display only messages matching a type in a comma-separated list of types
