@@ -109,6 +109,10 @@ Once you find your meter ID, you can add a filter to get only your meters:
 
 Examples:
 
+```
+/home/pi/go/bin/rtlamr -filterid=76356921,50056711 -msgtype=scm,scm+
+```
+
 Pull all SCM+ msgs:
 ```
 /home/pi/go/bin/rtlamr -msgtype=scm+
