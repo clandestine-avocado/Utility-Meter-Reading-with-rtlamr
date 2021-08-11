@@ -113,20 +113,6 @@ Examples:
 /home/pi/go/bin/rtlamr -filterid=76356921,50056711 -msgtype=scm,scm+
 ```
 
-Pull all SCM+ msgs:
-```
-/home/pi/go/bin/rtlamr -msgtype=scm+
-```
-
--filterid=: display only messages matching an id in a comma-separated list of ids.
-```
-/home/pi/go/bin/rtlamr -filterid=50056711,76356921
-```
-
--filtertype=: display only messages matching a type in a comma-separated list of types
-```
-/home/pi/go/bin/rtlamr -msgtype=scm,scm+
-```
 
 
 Other Useful rtl-amr options:
@@ -216,24 +202,40 @@ chmod +x /home/pi/hello_world.py
 ```
 
 Reload services for changes to take effect:
+
 ```
 sudo systemctl daemon-reload
 ```
 
-Enable and start the service:
+Enable the service:
+
 ```
-sudo systemctl enable gasmeter2mqtt.service
-sudo systemctl start gasmeter2mqtt.service
+sudo systemctl enable gasmeter2mqtt.service 
+OR 
+sudo systemctl enable elecmeter2mqtt.service 
+OR 
+sudo systemctl enable meters2mqtt.service
+
 ```
 
-Pull all SCM+ msgs:
+Start the service:
+
 ```
-/home/pi/go/bin/rtlamr -msgtype=scm+
+sudo systemctl start gasmeter2mqtt.service 
+OR 
+sudo systemctl start elecmeter2mqtt.service 
+OR 
+sudo systemctl start meters2mqtt.service
 ```
+
+
+
+
+
 
 -filterid=: display only messages matching an id in a comma-separated list of ids.
 ```
-/home/pi/go/bin/rtlamr -filterid=500576711,76356921
+/home/pi/go/bin/rtlamr -filterid=50056711,76356921 -msgtype=scm,scm+
 ```
 
 -filtertype=: display only messages matching a type in a comma-separated list of types
@@ -245,28 +247,49 @@ Pull all SCM+ msgs:
 
 
 
+
+
+Service related commands:
 |Function|Command|
 |-----|-----|
-|Pull all SCM+ msgs|```/home/pi/go/bin/rtlamr -msgtype=scm+```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-|XXXXXXXXXXXXXXXX|```XXXXXXXXXXXXXXX```|
-
----
-
-
-
-Other common service related tools:
-|Function|Command|
-|-----|-----|
+|Create service| See above|
+|Enable service|```sudo systemctl enable gasmeter2mqtt.service```|
+|Reload services|```sudo systemctl daemon-reload```|
+|Disable service|```sudo systemctl disable gasmeter2mqtt.service```|
+|Start service|```sudo systemctl start gasmeter2mqtt.service```|
 |Check status|```sudo systemctl status gasmeter2mqtt.service```|
 |Start service|```sudo systemctl start gasmeter2mqtt.service```|
 |Stop service|```sudo systemctl stop gasmeter2mqtt.service```|
 |Check log|```sudo journalctl -f -u gasmeter2mqtt.service```|
+
+---
+
+
+|Function|Command|
+|-----|-----|
+|Create service| See above|
+|Enable service|```sudo systemctl enable elecmeter2mqtt.service```|
+|Reload services|```sudo systemctl daemon-reload```|
+|Disable service|```sudo systemctl disable elecmeter2mqtt.service```|
+|Start service|```sudo systemctl start elecmeter2mqtt.service```|
+|Check status|```sudo systemctl status elecmeter2mqtt.service```|
+|Start service|```sudo systemctl start elecmeter2mqtt.service```|
+|Stop service|```sudo systemctl stop elecmeter2mqtt.service```|
+|Check log|```sudo journalctl -f -u elecmeter2mqtt.service```|
+
+---
+
+|Function|Command|
+|-----|-----|
+|Create service| See above|
+|Enable service|```sudo systemctl enable meters2mqtt.service```|
+|Reload services|```sudo systemctl daemon-reload```|
+|Disable service|```sudo systemctl disable meters2mqtt.service```|
+|Start service|```sudo systemctl start meters2mqtt.service```|
+|Check status|```sudo systemctl status meters2mqtt.service```|
+|Start service|```sudo systemctl start meters2mqtt.service```|
+|Stop service|```sudo systemctl stop meters2mqtt.service```|
+|Check log|```sudo journalctl -f -u meters2mqtt.service```|
 
 ---
 
