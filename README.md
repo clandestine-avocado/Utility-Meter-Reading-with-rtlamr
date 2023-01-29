@@ -22,13 +22,17 @@ sudo apt update
 sudo apt install snapd
 
 You will also need to reboot your device:
+```
 sudo reboot
-
+```
 After this, install the core snap in order to get the latest snapd:
+```
 sudo snap install core
-
+```
 Install rtlsdr, use the following command:
+```
 sudo snap install rtlsdr
+```
 
 //
 - GoLang >=1.3 (Go build environment setup guide: http://golang.org/doc/code.html)
