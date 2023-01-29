@@ -14,7 +14,23 @@ There's now experimental support for data collection and aggregation with [rtlam
 [![AGPLv3 License](https://img.shields.io/badge/license-AGPLv3-blue.svg?style=flat)](http://choosealicense.com/licenses/agpl-3.0/)
 
 ### Requirements
+//
+Second time around, I used Snap to get all requirements, and install.
+https://snapcraft.io/install/rtlsdr/raspbian
+On a Raspberry Pi running the latest version of Raspbian snap can be installed directly from the command line:
+sudo apt update
+sudo apt install snapd
 
+You will also need to reboot your device:
+sudo reboot
+
+After this, install the core snap in order to get the latest snapd:
+sudo snap install core
+
+Install rtlsdr, use the following command:
+sudo snap install rtlsdr
+
+//
 - GoLang >=1.3 (Go build environment setup guide: http://golang.org/doc/code.html)
 - rtl-sdr
   - Windows: [pre-built binaries](https://ftp.osmocom.org/binaries/windows/rtl-sdr/)
