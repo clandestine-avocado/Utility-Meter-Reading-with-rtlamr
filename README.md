@@ -1,4 +1,5 @@
 ### Purpose
+![Meter Image](assets/emeters.jpg "Utility Meter Image")
 
 RTL = 
 
