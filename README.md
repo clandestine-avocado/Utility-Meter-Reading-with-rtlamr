@@ -1,5 +1,5 @@
 ### Purpose
-![Meter Image](assets/emeters.jpg "Utility Meter Image")
+
 
 RTL = 
 
@@ -103,8 +103,9 @@ If you've got a meter not on the list that you've successfully received messages
 |Electric|41ER-1|4|EO941ER-1|50056711|910.0-920.0|[FCC Link](https://apps.fcc.gov/oetcf/eas/reports/Eas731GrantForm.cfm?mode=COPY&RequestTimeout=500&application_id=yWEjtEDMQV6HDbrnO7QtuQ%3D%3D&fcc_id=EO941ER-1)|
 
 ---
+Electric Meter ID above never reports; surveyed via rtlamr2mqtt and these are the results. ID 34183618 appears to me the most frequent SCM reporting meter, but this does not mean it is my meter.
+![Meter Image](assets/emeters.jpg "Utility Meter Image")
 
-rtl_amr --> CenterFreq: 912380000
 
 
 
